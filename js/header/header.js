@@ -31,7 +31,7 @@ function setLogo() {
   logoImage.style.height = "100px";
   logoImage.style.width = "150px";
   logoImage.style.objectFit = "contain";
-  logoImage.src = "images/seeimages/logo.png";
+  logoImage.src = "/images/seeimages/logo.png";
   logoImage.style.flex = 1
 
   linkImage.appendChild(logoImage)
