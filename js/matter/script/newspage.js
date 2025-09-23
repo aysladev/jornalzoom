@@ -1,110 +1,108 @@
-// recuperando parametros da query da pagina
+import { getAllPostsBySection, getUniquePost } from "../../appwrite/services/posts";
+import { createCarousel } from "./carousel";
+
 const params = new URLSearchParams(window.location.search);
-// recuperando o parametro de section do artigo
 const section = params.get("section");
-// recuperando parametro de id do artigo
-const slug = params.get("slug");
+const matter_id = params.get("matter_id");
 
-// pegando o arquivo por tipo de section
-// const jsonBySection = {
-//   highlight: highlightCardJson,
-//   interesting: interestingCardJson,
-//   community: communityCardJson,
-//   see_this: seeThisCardJson,
-// };
-
-// função padrão para criar o link que jogaremos na nossa query
-function handleNavigation(slugName) {
-  return `matter.html?section=${section}&slug=${slugName}`;
+function handleNavigation(matter_id) {
+  return `matter.html?section=${section}&matter_id=${matter_id}`;
 }
 
-function createText(matter, matterTextsArea) {
-  matter.texts.forEach((text) => {
-    if (text.image) {
-      const newImage = document.createElement("img");
-      newImage.src = text.image;
+function getMatterDate(createdAt) {
+  const date = new Date(createdAt);
+  const options = { day: "2-digit", month: "long", year: "numeric" };
+  return date.toLocaleDateString("pt-BR", options);
+}
 
-      matterTextsArea.appendChild(newImage);
-    } else {
-      const newP = document.createElement("p");
+function createLinks(sources) {
+  const container = document.createElement("div");
+  container.style.marginTop = "12px";
 
-      // Verifica se o texto contém uma tag de link <a>
-      const linkRegex = /<a>(.*?)<\/a>/;
-      const match = text.text.match(linkRegex);
+  const prefix = document.createElement("span");
+  prefix.textContent = "Fontes:";
+  prefix.style.fontWeight = "bold";
+  container.appendChild(prefix);
 
-      if (match) {
-        // Se encontrou link, cria o texto antes e o link
-        const partes = text.text.split(linkRegex);
-        newP.append(document.createTextNode(partes[0])); // texto antes do link
+  const linksWrapper = document.createElement("div");
+  linksWrapper.classList.add("d-flex", "flex-column", "gap-2");
+  linksWrapper.style.marginTop = "8px";
 
-        const link = document.createElement("a");
-        link.href = match[1];
-        link.classList.add("link");
-        link.textContent = match[1];
-        link.target = "_blank"; // abre em nova aba
-        newP.appendChild(link);
+  sources.forEach((src) => {
+    const link = document.createElement("a");
+    link.href = src;
+    link.textContent = src;
+    link.classList.add("link", "source-link");
+    link.target = "_blank";
 
-        if (partes[2]) {
-          newP.append(document.createTextNode(partes[2])); // texto após o link, se houver
-        }
-      } else {
-        // Caso não tenha link, só adiciona o texto normal
-        newP.textContent = text.text;
-      }
-
-      matterTextsArea.appendChild(newP);
-    }
+    linksWrapper.appendChild(link);
   });
+
+  container.style.marginBottom = "24px";
+
+  container.appendChild(linksWrapper);
+  return container;
 }
+
 
 function createCard(cardArea, relatedArticlesCard) {
   const cardImage = cardArea.querySelector(".img-fluid");
-  cardImage.src = relatedArticlesCard.thumbmail;
-  cardImage.alt = relatedArticlesCard.thumbmailAlt;
+  cardImage.src = relatedArticlesCard.matter_image;
+  cardImage.alt = "matter-image";
 
-  // definindo o link no nosso a
-  cardArea.querySelector("a").href = handleNavigation(relatedArticlesCard.slug);
+  cardArea.querySelector("a").href = handleNavigation(relatedArticlesCard.$id);
   cardArea.querySelector(".card-body .card-text").textContent =
-    relatedArticlesCard.description || relatedArticlesCard.title;
+    relatedArticlesCard.title;
 }
 
-function createMatter(matter) {
+function createMatter(matter, carouselContainer) {
   const matterInfoArea = document
     .querySelector(".models #matter-info")
     .cloneNode(true);
 
   const matterImage = matterInfoArea.querySelector("#thumbmail-image");
-
-  matterImage.src = matter.thumbmail;
-  matterImage.alt = matter.thumbmailAlt;
+  matterImage.src = matter.matter_image;
+  matterImage.alt = "matter_image";
 
   matterInfoArea.querySelector(".article-infos h2").textContent = matter.title;
   matterInfoArea.querySelector(
     ".fst-italic small"
-  ).textContent = `${matter.actorName} - ${matter.year}`;
+  ).textContent = `Por ${matter.name} | ${matter.email} - ${getMatterDate(
+    matter.$createdAt
+  )}`;
 
   const matterTextsArea = matterInfoArea.querySelector(".article-text");
+  matterTextsArea.textContent = matter.content;
 
-  if (matter?.texts && matter.texts.length > 0) {
-    createText(matter, matterTextsArea);
+  const matterInfoWrapper = document.createElement("div");
+  matterInfoWrapper.appendChild(matterInfoArea);
+  matterInfoWrapper.appendChild(carouselContainer);
+
+  if (matter.sources && matter.sources.length > 0) {
+    const linkContainer = createLinks(matter.sources);
+    matterInfoWrapper.appendChild(linkContainer);
   }
 
-  document.querySelector("#matter-info-area").appendChild(matterInfoArea);
+  document.querySelector("#matter-info-area").appendChild(matterInfoWrapper);
 }
 
-function init() {
-  const getUniqueMatter = matterJson.find((matter) => matter.slug === slug);
+async function init() {
+  const post = await getUniquePost(matter_id);
+  const carouselInfo = post.textImages ? JSON.parse(post.textImages) : [];
+  const otherMatters = await getAllPostsBySection(6, post.displayLocation);
+  const carouselContainer = document
+    .querySelector(".models #carousel-area")
+    .cloneNode(true);
 
-  const otherMatters = matterJson.filter(
-    (json) => json.slug !== slug && json.section === section
-  );
+  if (carouselInfo.length > 0) createCarousel(carouselInfo, carouselContainer);
 
-  createMatter(getUniqueMatter);
+  createMatter(post, carouselContainer);
 
-  otherMatters.forEach((relatedArticlesCard) => {
+  otherMatters.rows.forEach((relatedArticlesCard) => {
     const cardArea = document
       .querySelector(".models #related-articles-card")
       .cloneNode(true);
+
     cardArea.style.display = "block";
     createCard(cardArea, relatedArticlesCard);
     document.querySelector("#related-articles-area").appendChild(cardArea);

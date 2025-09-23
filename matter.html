@@ -1,73 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Matéria</title>
-    <link rel="icon" type="image/png" href="images/seeimages/logo.png" />
-    <link rel="stylesheet" href="./css/stylematter.css" />
-    <link rel="stylesheet" href="./css/reset.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-    />
-  </head>
 
-  <body>
-    <div class="container mt-4">
-      <div class="models">
-        <!-- matter area  -->
-        <div id="matter-info" class="">
-          <img
-            src=""
-            id="thumbmail-image"
-            class="img-fluid w-100 object-fit-contain"
-            alt=""
-            style="height: 400px;"
-          />
-          <div class="article-infos">
-            <h2 class="mt-3"></h2>
-            <p class="fst-italic">
-              <small class="text-body-secondary"></small>
-            </p>
-          </div>
-          <div class="article-text"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matéria</title>
+  <link rel="icon" type="image/png" href="images/seeimages/logo.png" />
+  <link rel="stylesheet" href="./css/stylematter.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+</head>
+
+<body>
+  <div class="container mt-4">
+    <div class="models">
+      <!-- matter area  -->
+      <div id="matter-info" class="mb-4">
+        <img src="" id="thumbmail-image" class="img-fluid w-100 object-fit-contain" alt="" style="height: 400px;" />
+        <div class="article-infos">
+          <h2 class="mt-3"></h2>
+          <p class="fst-italic">
+            <small class="text-body-secondary"></small>
+          </p>
         </div>
-
-        <!-- related-articles cards -->
-        <div id="related-articles-card" class="card border-0 mb-4">
-          <a id="related-articles-card-link">
-            <div class="row g-0 d-flex align-items-start">
-              <div class="col-4">
-                <img src="" class="img-fluid rounded-1" alt="" />
-              </div>
-              <div class="col-8">
-                <div class="card-body p-2">
-                  <p class="card-text fw-bold text-multiline-ellipsis"></p>
-                </div>
+        <div class="article-text"></div> 
+        <div id="carousel-area" class="carousel slide">
+          <div class="carousel-indicators"></div>
+          <div class="carousel-inner"></div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <div class="article-link"></div> 
+      </div>
+      
+      
+      <!-- related-articles cards -->
+      <div id="related-articles-card" class="card border-0 mb-4">
+        <a id="related-articles-card-link">
+          <div class="row g-0 d-flex align-items-start">
+            <div class="col-4">
+              <img src="" class="img-fluid rounded-1" alt="" />
+            </div>
+            <div class="col-8">
+              <div class="card-body p-2">
+                <p class="card-text fw-bold text-multiline-ellipsis"></p>
               </div>
             </div>
-          </a>
-        </div>
-
+          </div>
+        </a>
       </div>
 
-      <div id="matter-area" class="row px-3 px-lg-0">
-        <div id="matter-info-area" class="article p-0 col-12 col-lg-8"></div>
-        <div class="related-articles col-12 col-lg-4 p-0 ps-0 ps-lg-4">
-          <h4 class="mb-4">Artigos relacionados</h5>
+    </div>
+
+    <div id="matter-area" class="row px-3 px-lg-0">
+      <div id="matter-info-area" class="article p-0 col-12 col-lg-8" style="padding-bottom: 24px;"></div>
+      <div class="related-articles col-12 col-lg-4 p-0 ps-0 ps-lg-4">
+        <h4 class="mb-4">Artigos relacionados</h4>
           <div id="related-articles-area"></div>
-        </div>
       </div>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./js/header/header.js"></script>
-    <script src="./js/matter/jsons/matterJson.js"></script>
-    <script src="./js/matter/script/newspage.js"></script>
-  </body>
+  </div>
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./js/header/header.js"></script>
+  <script type="module" src="./js/matter/jsons/matterJson.js"></script>
+  <script type="module" src="./js/matter/script/newspage.js"></script>
+  <script type="mode" src="./js/matter/script/carousel.js"></script>
+</body>
+
 </html>

@@ -17,4 +17,5 @@ function init() {
     document.querySelector("#category-card-area").appendChild(cardArea);
   });
 }
+
 init();

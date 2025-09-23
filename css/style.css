@@ -1,13 +1,13 @@
 body {
-  background-color: #f9eef3;
+  background-color: #f0f2f5; /* Um cinza claro para o fundo */
 }
 
 .bg-default {
-  background-color: #f9eef3;
+  background-color: #f0f2f5; /* Mantém o fundo padrão cinza claro */
 }
 
 .bg-tag {
-  background-color: #e297bc;
+  background-color: #c0392b; /* O vermelho do "Jornal" para tags */
 }
 
 .bg-custom {
@@ -23,7 +23,7 @@ body {
 }
 
 .card-tag {
-  background-color: #f9eef3;
+  background-color: #f0f2f5; /* Mantém o fundo do card da tag cinza claro */
 }
 
 .line-2 { line-clamp: 2; -webkit-line-clamp: 2; }
@@ -39,11 +39,11 @@ body {
 }
 
 header {
-  color: #7ab89a;
+  color: #1c4a6b; /* O azul do "Zoom" para o cabeçalho */
 }
 
 .section-buttom {
-  color: #2b4639;
+  color: #1c4a6b; /* O azul do "Zoom" para os botões de seção */
 }
 
 .highlight-infos::before {
@@ -54,7 +54,7 @@ header {
   width: 100%;
   height: 100%;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 60%);
-  z-index: -1; /* Coloque ele atrás do conteúdo */
+  z-index: -1;
 }
 
 .highlight-infos {
@@ -71,8 +71,8 @@ header {
 }
 
 .navbar-secondary {
-  border-top: 1px solid #e297bc;
-  border-bottom: 1px solid #e297bc;
+  border-top: 1px solid #c0392b; /* Borda superior vermelha */
+  border-bottom: 1px solid #c0392b; /* Borda inferior vermelha */
 }
 
 @media (max-width: 768px) {

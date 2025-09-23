@@ -26,3 +26,19 @@ header {
 .article-text {
   white-space: pre-line;
 }
+#carouselExampleCaptions .carousel-item img {
+  height: 290px; 
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  #carouselExampleCaptions .carousel-item img {
+    height: 400px; 
+  }
+}
+
+@media (min-width: 1200px) {
+  #carouselExampleCaptions .carousel-item img {
+    height: 500px; 
+  }
+}
