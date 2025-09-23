@@ -1,5 +1,5 @@
-import { getAllPosts, getAllPostsBySection } from "../../appwrite/services/posts";
-import { tags } from "../../utils/tags";
+import { getAllPosts, getAllPostsBySection } from "../../appwrite/services/posts.js";
+import { tags } from "../../utils/tags.js";
 console.log("🔍 Variáveis de ambiente:", import.meta.env);
 // função padrão que cria os links das nossas paginas
 function handleNavigation(sectionName, matter_id) {
