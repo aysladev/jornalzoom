@@ -1,17 +1,16 @@
 const btnAddFonte = document.getElementById("btnAddFonte");
 const extraFontesContainer = document.getElementById("extra-fontes");
-let fonteCount = 1;
+let fonteCount = 1; // já existe o primeiro input
 
 function createFonteInput() {
-  fonteCount++;
   const wrapper = document.createElement("div");
-  wrapper.className = "col-12 d-flex align-items-end gap-2";
+  wrapper.className = "d-flex align-items-end gap-2";
 
   const input = document.createElement("input");
   input.type = "text";
   input.className = "form-control";
-  input.id = `fonte-${fonteCount}`;
-  input.name = `fonte-${fonteCount}`;
+  input.id = `fonte-${fonteCount + 1}`;
+  input.name = `fonte-${fonteCount + 1}`;
 
   const removeBtn = document.createElement("button");
   removeBtn.type = "button";
@@ -30,9 +29,10 @@ function createFonteInput() {
 }
 
 function addFonteBlock() {
-  if (fonteCount >= 5) return;
+  if (fonteCount >= 5) return; // limite total
   const newFonte = createFonteInput();
   extraFontesContainer.appendChild(newFonte);
+  fonteCount++;
   toggleAddFonteButton();
 }
 

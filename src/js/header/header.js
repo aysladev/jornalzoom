@@ -1,3 +1,5 @@
+import logo from "../../images/seeimages/logo.png";
+
 const body = document.querySelector("body");
 
 function setMenu() {
@@ -31,7 +33,7 @@ function setLogo() {
   logoImage.style.height = "100px";
   logoImage.style.width = "150px";
   logoImage.style.objectFit = "contain";
-  logoImage.src = "/images/seeimages/logo.png";
+  logoImage.src = logo;
   logoImage.style.flex = 1
 
   linkImage.appendChild(logoImage)

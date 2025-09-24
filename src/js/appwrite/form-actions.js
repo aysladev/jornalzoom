@@ -1,5 +1,5 @@
-import { v4 as uuidV4 } from "uuid";
-import { createPost } from "./services/posts";
+import { createPost } from "./services/posts.js";
+import { UUID } from "https://unpkg.com/uuidjs@^5";
 
 const matterForm = document.querySelector("#matter-form");
 
@@ -32,12 +32,14 @@ async function onFormSubmit(event) {
     })
     .filter(item => item.image);
 
-  const sources = Array.from(document.querySelectorAll('#extra-fontes input'))
-    .map(input => input.value.trim())
-    .filter(value => value !== ""); 
+  const sources = [
+    document.querySelector("#fonte-1").value.trim(), 
+    ...Array.from(document.querySelectorAll("#extra-fontes input"))
+      .map(input => input.value.trim())
+  ].filter(value => value !== "");
 
   const matter = {
-    $id: uuidV4(),
+    $id: UUID.generate(),
     name: matterName,
     email,
     displayLocation,

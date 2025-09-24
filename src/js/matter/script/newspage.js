@@ -1,5 +1,5 @@
-import { getAllPostsBySection, getUniquePost } from "../../appwrite/services/posts";
-import { createCarousel } from "./carousel";
+import { getAllPostsBySection, getUniquePost } from "../../appwrite/services/posts.js";
+import { createCarousel } from "./carousel.js";
 
 const params = new URLSearchParams(window.location.search);
 const section = params.get("section");
