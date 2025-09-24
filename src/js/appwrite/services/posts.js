@@ -2,13 +2,13 @@ const client = new Appwrite.Client();
 
 client
   .setEndpoint("https://nyc.cloud.appwrite.io/v1")
-  .setProject("68cf1e4d003799128002");
+  .setProject("68d07aac0010a7b0a489");
 
 const storage = new Appwrite.Storage(client);
 const tablesDB = new Appwrite.TablesDB(client);
 
-const BUCKET_ID = "68cf238800133c40b9fb";
-const DATABASE_ID = "68cf1e8d0009255d1f4b";
+const BUCKET_ID = "68d1f371001905737525";
+const DATABASE_ID = "68d07b30000f30fd4961";
 const TABLE_ID = "posts";
 
 async function uploadTextImages(textImages) {
