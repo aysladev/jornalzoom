@@ -111,3 +111,17 @@ header {
 .card-text {
   white-space: pre-line;
 }
+footer {
+  background-color: #184b63; /* cor do fundo */
+  color: #ffffff; /* cor padrão do texto */
+}
+
+footer a {
+  color: #9ca3af !important; /* força links brancos */
+  text-decoration: underline; 
+}
+
+footer a:hover {
+  color: #f0f0f0 !important; /* cor ao passar o mouse */
+  text-decoration: underline;
+}
